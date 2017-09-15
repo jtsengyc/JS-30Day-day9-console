@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log(dogs);
+
+    // Interpolated
+    console.log("this is a string with variable used - %s", dogs);
+    console.log(`this is a string with variable used in back tick - ${dogs}`);
+
+    // Styled
+    console.log("%c-string with styles, %cImpacts word after each % c, %cmultiple style allowed", "color: blue; font-size: 20px;", "color: red;", "color: green")
+
+    // warning!
+    console.warn("warning!");
+
+    // Error :|
+    console.error("Error!");
+
+    // Info
+    console.info("Info!");
+
+    // Testing
+    console.assert(1 === 2, "assertion failed");
+    console.assert(1 === 1, "this will not get printed");
+
+    // clearing
+    //console.clear();
+
+    // Viewing DOM Elements
+    const domP = document.querySelector('p');
+    console.log(domP);
+    console.dir(domP);
+
+    // Grouping together
+    dogs.forEach((dog, idx) => {
+      console.group(dog.name);  // console.groupCollapsed(dog.name)
+      console.log(`dog ${idx+1} is ${dog.name}`);
+      console.group("inner");   // can be nested
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.groupEnd();
+      console.groupEnd();
+    })
+
+    console.table(dogs);
+
+    // counting
+    console.count("a");
+    console.count("a");
+    console.count("b");
+    console.count("a");
+    console.count("b");
+
+    // timing
+    console.time('ajax');
+    fetch('https://api.github.com/users/jtsengyc')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('ajax');
+        console.log(data);
+      });
+
+  </script>
+</body>
+</html>
